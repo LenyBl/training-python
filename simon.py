@@ -2,7 +2,7 @@
 from random import randrange
 import os, time
 
-def showNumbers(list):
+def showNumbers(list, difficult):
 	for listNum in list:
 		print(f"{listNum}", end="")
 	print()
@@ -37,27 +37,35 @@ def checkError(input):
 def difficult(difficulty):
 	match difficulty:
 		case "easy":
-			return [5, 1]
+			return [5, 1, 4]
 		case "medium":
-			return [3, 2]
+			return [3, 2, 4]
 		case "hard":
-			return [2, 4]
+			return [2, 4, 4]
 		case "impossible":
-			return [1, 10]
+			return [1, 10, 4]
+		case _:
+			return None
+
+while True:
+	userInputDifficulty = input("Quelle difficulté voulez-vous choisir ? (easy, medium, hard, impossible) : ").lower()
+
+	listValueDifficulty = difficult(userInputDifficulty)
+
+	if listValueDifficulty is not None:
+		break
+	else:
+		print("❌ Difficulté invalide, veuillez réessayer.\n")
 
 list_numbers = []
 status = True
 correctAnswer = 0
 
-for i in range(0,4):
+for i in range(0, listValueDifficulty[2]):
 	list_numbers.append(randrange(10))
 
-userInputDifficulty = input("Quel difficulté voulez vous choisir ? (easy, medium, hard, impossible) : ")
-
 while status:
-	listValueDifficulty = difficult(userInputDifficulty)
-	print(listValueDifficulty)
-	showNumbers(list_numbers)
+	showNumbers(list_numbers, userInputDifficulty)
 	time.sleep(listValueDifficulty[0])
 	clearTerminal()
 	userInput = input("Quelle est la liste de nombre ? : ")
