@@ -83,4 +83,3 @@ while status:
 			print("La taille de saisie n'est pas correct !")
 	else: 
 		print("La saisie contient des caractères autres que des chiffres !")
-		
